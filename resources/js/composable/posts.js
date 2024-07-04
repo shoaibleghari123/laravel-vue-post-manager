@@ -44,6 +44,10 @@ export default function usePosts() {
         axios.post('/api/posts',serializedPost)
             .then( response => {
                 router.push({name: 'posts.index'})
+                swal({
+                    icon: 'success',
+                    title: 'post save successfully'
+                })
         })
             .catch(error => {
                 if (error.response?.data) {

@@ -5,25 +5,53 @@ window._ = require('lodash');
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+//
+// window.axios = require('axios');
+//
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+//
+// window.axios.defaults.withCredentials = true
+// window.axios.interceptors.response.use(
+//     response => response,
+//     error => {
+//         if (error.response?.status === 401 || error.response?.status === 419) {
+//             if (JSON.parse(localStorage.getItem('loggedIn'))) {
+//                 localStorage.setItem('loggedIn', false)
+//                 location.assign('/login')
+//             }
+//         }
+//
+//         return Promise.reject(error)
+//     }
+// )
+
+
 
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
 
-window.axios.defaults.withCredentials = true
+// Set Axios default header for authorization from localStorage
+const token = localStorage.getItem('access_token');
+if (token) {
+    window.axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
+
 window.axios.interceptors.response.use(
     response => response,
     error => {
         if (error.response?.status === 401 || error.response?.status === 419) {
             if (JSON.parse(localStorage.getItem('loggedIn'))) {
-                localStorage.setItem('loggedIn', false)
-                location.assign('/login')
+                localStorage.setItem('loggedIn', false);
+                localStorage.removeItem('access_token');
+                location.assign('/login');
             }
         }
-
-        return Promise.reject(error)
+        return Promise.reject(error);
     }
-)
+);
+
 
 
 /**

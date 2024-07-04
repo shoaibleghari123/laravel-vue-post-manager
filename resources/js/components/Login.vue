@@ -46,9 +46,9 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import useAuth from "../composable/auth";
-    export default {
+
+export default {
         setup() {
             const { loginForm, processing, validationErrors, submitLogin } = useAuth()
 

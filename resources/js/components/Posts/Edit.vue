@@ -65,10 +65,11 @@
 </template>
 <script>
 
-import {onMounted, reactive} from "vue";
-import { useRoute } from "vue-router"
+import {onMounted} from "vue";
+import {useRoute} from "vue-router"
 import useCategories from '../../composable/categories'
 import usePosts from '../../composable/posts'
+
 export default {
     setup() {
 

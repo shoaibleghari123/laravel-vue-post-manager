@@ -87,8 +87,8 @@
 
 
                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                    <router-link :to="{ name: 'posts.edit', params: { id: post.id } }">Edit</router-link>
-                    <a href="#" @click.prevent="deletePost(post.id)" class="ml-2">Delete</a>
+                    <router-link  :to="{ name: 'posts.edit', params: { id: post.id } }">Edit</router-link>
+                    <a href="#"  @click.prevent="deletePost(post.id)" class="ml-2">Delete</a>
                 </td>
             </tr>
             </tbody>
@@ -99,9 +99,11 @@
 
 </template>
 <script>
-import { ref, onMounted, watch } from "vue";
+import {onMounted, ref, watch} from "vue";
 import usePosts from '../../composable/posts'
 import useCategories from '../../composable/categories'
+import { useAbility } from "@casl/vue";
+
 export default {
     setup() {
         const search_category = ref('')
@@ -111,7 +113,7 @@ export default {
         const search_global = ref('')
         const { posts, getPosts, deletePost } = usePosts()
         const { categories, getCategories } = useCategories()
-
+        const { can } = useAbility()
         watch(search_category, (current, previous) => {
             getPosts(1, current, search_id.value, search_title.value, search_content.value, search_global.value)
         })
@@ -147,7 +149,8 @@ export default {
             search_id,
             search_title,
             search_content,
-            search_global
+            search_global,
+            can
         }
     }
 }
