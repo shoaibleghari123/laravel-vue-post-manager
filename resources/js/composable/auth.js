@@ -67,12 +67,15 @@ export default function useAuth() {
     }
 
     const getAbilities = async => {
-        axios.get('/api/ability')
+        axios.get('/api/abilities')
             .then(response => {
                 const permissions = response.data
                 const { can, rules } = new AbilityBuilder(Ability)
 
                 can(permissions)
+
+                console.log("get ability function has been called");
+                console.log(permissions);
 
                 ability.update(rules)
             })
