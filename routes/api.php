@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::group(['middleware' => 'auth:sanctum'], function () {
-
+Route::middleware(['auth:sanctum', 'check.permissions'])->group(function () {
 
 Route::apiResource('/posts', PostController::class);
 Route::get('/categories', [CategoryController::class, 'index']);

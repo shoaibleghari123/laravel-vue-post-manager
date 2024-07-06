@@ -25,21 +25,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-//        foreach (Permission::pluck('name') as $permission) {
-//            Gate::define($permission, function ($user) use ($permission) {
-//                return $user->roles()->whereHas('permissions', function ($q) use ($permission) {
-//                    $q->where('name', $permission);
-//                });
-//            });
-//        }
-
-        foreach (Permission::pluck('name') as $permission) {
-            Gate::define($permission, function ($user) use ($permission) {
-                return $user->roles()->whereHas('permissions', function ($q) use ($permission) {
-                        $q->where('name', $permission);
-                    })->count() > 0;
-            });
-        }
     }
 }
