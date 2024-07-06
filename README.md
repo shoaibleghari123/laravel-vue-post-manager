@@ -57,3 +57,7 @@ divided the components into composable and main components. Composables serve a 
 Laravel. The application demonstrates how to manage posts, including functionalities such as creation, reading,
 updating, and deletion. It leverages Vue.js for the frontend and Laravel for the backend.
 
+HOW TO WORK WITH
+
+Vue Js, SPA, Laravel, Sanctum, User, Role, Permissions, Validation, Vue Js pagination, Vue Js abilities, Vue Js composition etc...
+
